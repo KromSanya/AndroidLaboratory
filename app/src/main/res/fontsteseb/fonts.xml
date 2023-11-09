@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <font-family name="Sk-Modernist">
+        <font
+            android:font="@font/skmodernistregular.otf" <!-- —сылка на ваш файл шрифта -->
+            android:fontWeight="400"
+            android:fontStyle="normal" />
+    </font-family>
+</resources>
