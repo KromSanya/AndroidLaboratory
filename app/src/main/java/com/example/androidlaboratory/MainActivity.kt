@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,6 +26,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarHalf
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -47,7 +49,9 @@ import androidx.core.view.WindowCompat
 import com.example.androidlaboratory.ui.theme.AndroidLaboratoryTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-
+val skmodern = FontFamily(
+    Font(R.font.skmodernistregular, FontWeight.Normal)
+)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,191 +71,215 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@Composable
+private fun DotaHeader(){
+        Image(
+            painter = painterResource(id = R.drawable.headerimage),
+            contentDescription = "Header",
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier.fillMaxWidth()
+        )
+}
 
 @Composable
-private fun DotaScreen() {
-    val skmodern = FontFamily(
-        Font(R.font.skmodernistregular, FontWeight.Normal)
+private fun DotaLogo(){
+    Row(
+        Modifier
+            .fillMaxWidth()
+         //   .height(80.dp)
     )
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFF050B18)),
-    ) {
-        item {
-            Box() {
-                Image(
-                    painter = painterResource(id = R.drawable.headerimage),
-                    contentDescription = "Header",
-                    contentScale = ContentScale.FillWidth,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-            }
-        }
-        item {
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .height(100.dp)
+    {
+        Box(
+            modifier = Modifier
+                .offset(20.dp, -40.dp)
+                .border(1.dp, Color.DarkGray, shape = RoundedCornerShape(16.dp))
+                .size(100.dp)
+                .background(color = Color.Black, shape = RoundedCornerShape(16.dp)),
+            contentAlignment = Alignment.Center
+        )
+        {
+            Image(
+                painter = painterResource(id = R.drawable.dota),
+                contentDescription = "Dota",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(70.dp)
             )
-            {
-                Box(
-                    modifier = Modifier
-                        .offset(20.dp, -40.dp)
-                        .border(1.dp, Color.DarkGray, shape = RoundedCornerShape(16.dp))
-                        .size(100.dp)
-                        .background(color = Color.Black, shape = RoundedCornerShape(16.dp)),
-                    contentAlignment = Alignment.Center
-                )
-                {
-                    Image(
-                        painter = painterResource(id = R.drawable.dota),
-                        contentDescription = "Dota",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(70.dp)
-                    )
-                }
-                Text(text = "DoTA 2", Modifier.offset(130.dp, 0.dp), fontSize = 24.sp,
-                    color = Color(0xFFFFFFFF),
-                    fontFamily = skmodern,
-                    fontWeight = FontWeight.Normal,)
+        }
+        Column(
+            Modifier.offset(40.dp)
+        ) {
+            Text(
+                text = "DoTA 2",
+                fontSize = 24.sp,
+                color = Color(0xFFFFFFFF),
+                fontFamily = skmodern,
+                fontWeight = FontWeight.Normal,
+            )
+            Row() {
                 for (i in 0..4) {
                     Icon(
                         Icons.Filled.Star, "bsw", tint = Color.Yellow, modifier = Modifier
                             .size(15.dp)
-                            .offset((130 + (15 * i)).dp, 30.dp)
+                            .offset((3 * i).dp)
                     )
 
                 }
-                Text(text = "70M", modifier = Modifier.offset(210.dp, 30.dp), fontSize = 13.sp,
+                Text(
+                    text = "70M", Modifier.offset(15.dp), fontSize = 12.sp,
                     color = Color(0xFF45454D),
                     fontFamily = skmodern,
-                    fontWeight = FontWeight.Normal,)
+                    fontWeight = FontWeight.Normal,
+                )
+            }
 
-                LazyRow(
-                    modifier = Modifier
-                        .offset(24.dp, 85.dp)
-                ) {
-                    val list = listOf("MOBA", "MULTIPLAYER", "STRATEGY")
-                    itemsIndexed(list)
-                    { _, item ->
-                        Box(
-                            modifier = Modifier
-                                .padding(horizontal = 5.dp)
-                                .clip(RoundedCornerShape(20.dp))
-                                .background(Color(0x3D44A9F4))
-                        ) {
-                            Text(
-                                text = item,
-                                modifier = Modifier
-                                    .padding(horizontal = 10.dp)
-                                    .padding(vertical = 5.dp),
-                                fontSize = 14.sp,
-                                fontFamily = skmodern,
-                                fontWeight = FontWeight.Normal,
-                                color = Color(0xFF41A0E7)
-                            )
-                        }
-                    }
-                }
-            }
         }
-        item {
-            Text(
-                text = "Dota 2 is a multiplayer online battle arena (MOBA) game which has two teams of five players compete to collectively destroy a" +
-                        " large structure defended by the opposing team known as the \"Ancient\", whilst defending their own.",
-                fontSize = 12.sp,
-                modifier = Modifier
-                    .offset(24.dp, 20.dp)
-                    .width(350.dp)
-                    .height(120.dp),
-                fontFamily = skmodern,
-                fontWeight = FontWeight.Normal,
-                color = Color(0xB3EEF2FB)
-            )
-        }
-        item {
-            Row(
-                modifier = Modifier
-                    .offset(0.dp, 50.dp)
-                    .fillMaxWidth()
-                    .height(128.dp)
-            )
-            {
-                Image(
-                    painter = painterResource(id = R.drawable.first),
-                    contentDescription = "FirstImage",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(240.dp)
-                        .clip(RoundedCornerShape(16.dp))
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.second),
-                    contentDescription = "SecondImage",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(240.dp)
-                        .offset(10.dp, 0.dp)
-                        .clip(RoundedCornerShape(16.dp))
-                )
-            }
-        }
-        item {
+    }
+}
+
+@Composable
+private fun DotaTags(){
+    LazyRow(
+        modifier = Modifier
+            .offset(24.dp, 0.dp)
+            .height(50.dp)
+    ) {
+        val list = listOf("MOBA", "MULTIPLAYER", "STRATEGY")
+        itemsIndexed(list)
+        { _, item ->
             Box(
-                Modifier
-                    .offset(24.dp, 80.dp)
-                    .fillMaxWidth()
-            )
-            {
+                modifier = Modifier
+                    .padding(horizontal = 5.dp)
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(Color(0x3D44A9F4))
+            ) {
                 Text(
-                    text = "Review & Ratings",
-                    fontSize = 20.sp,
-                    color = Color(0xFFFFFFFF),
-                    fontFamily = skmodern,
-                    fontWeight = FontWeight.Normal
-                )
-                Row(
+                    text = item,
                     modifier = Modifier
-                        .offset(0.dp, 30.dp)
+                        .padding(horizontal = 10.dp)
+                        .padding(vertical = 5.dp),
+                    fontSize = 14.sp,
+                    fontFamily = skmodern,
+                    fontWeight = FontWeight.Normal,
+                    color = Color(0xFF41A0E7)
                 )
-                {
-                    Text(text = "4.9", fontSize = 40.sp,
-                        color = Color(0xFFFFFFFF),
-                        fontFamily = skmodern,
-                        fontWeight = FontWeight.Normal)
-                    for (i in 0..3) {
-                        Icon(
-                            Icons.Filled.Star, "bsw", tint = Color.Yellow, modifier = Modifier
-                                .size(15.dp)
-                                .offset(20.dp, 5.dp)
-                        )
-                    }
-                    Icon(
-                        Icons.Filled.StarHalf, "wrb", tint = Color.Yellow, modifier = Modifier
-                            .size(15.dp)
-                            .offset(20.dp, 5.dp)
-                    )
-                    Text(
-                        text = "70M Reviews",
-                        modifier = Modifier.offset(-60.dp, 20.dp),
-                        color = Color(0xFFA8ADB7),
-                        fontSize = 14.sp,
-                        fontFamily = skmodern,
-                        fontWeight = FontWeight.Normal
-                    )
-                }
-
             }
         }
+    }
+}
+
+@Composable
+private fun DotaDesc(){
+    Text(
+        text = "Dota 2 is a multiplayer online battle arena (MOBA) game which has two teams of five players compete to collectively destroy a" +
+                " large structure defended by the opposing team known as the \"Ancient\", whilst defending their own.",
+        fontSize = 12.sp,
+        modifier = Modifier
+            .offset(24.dp, 0.dp)
+            .width(350.dp)
+            .height(120.dp),
+        fontFamily = skmodern,
+        fontWeight = FontWeight.Normal,
+        color = Color(0xB3EEF2FB)
+    )
+}
+
+@Composable
+private fun DotaImages(){
+    LazyRow(
+        modifier = Modifier
+            // .offset(0.dp, 50.dp)
+            .fillMaxWidth()
+            .height(128.dp)
+    )
+    {
+        item {
+            Image(
+                painter = painterResource(id = R.drawable.first),
+                contentDescription = "FirstImage",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(240.dp)
+                    .clip(RoundedCornerShape(16.dp))
+            )
+            Image(
+                painter = painterResource(id = R.drawable.second),
+                contentDescription = "SecondImage",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(240.dp)
+                    .offset(10.dp, 0.dp)
+                    .clip(RoundedCornerShape(16.dp))
+            )
+        }
+    }
+}
+
+@Composable
+private fun DotaRating(){
+    Column(
+        Modifier
+            .offset(24.dp, 10.dp)
+            .fillMaxWidth()
+    )
+    {
+        Text(
+            text = "Review & Ratings",
+            fontSize = 20.sp,
+            color = Color(0xFFFFFFFF),
+            fontFamily = skmodern,
+            fontWeight = FontWeight.Normal
+        )
+        Row(
+            modifier = Modifier
+                .offset(0.dp, 10.dp)
+        )
+        {
+            Text(text = "4.9", fontSize = 40.sp,
+                color = Color(0xFFFFFFFF),
+                fontFamily = skmodern,
+                fontWeight = FontWeight.Normal)
+            for (i in 0..3) {
+                Icon(
+                    Icons.Filled.Star, "bsw", tint = Color.Yellow, modifier = Modifier
+                        .size(15.dp)
+                        .offset(20.dp, 5.dp)
+                )
+            }
+            Icon(
+                Icons.Filled.StarHalf, "wrb", tint = Color.Yellow, modifier = Modifier
+                    .size(15.dp)
+                    .offset(20.dp, 5.dp)
+            )
+            Text(
+                text = "70M Reviews",
+                modifier = Modifier.offset(-60.dp, 20.dp),
+                color = Color(0xFFA8ADB7),
+                fontSize = 14.sp,
+                fontFamily = skmodern,
+                fontWeight = FontWeight.Normal
+            )
+        }
+
+    }
+}
+
+@Composable
+private fun DotaReview(){
+    LazyColumn(
+        Modifier
+           // .offset(24.dp, 0.dp)
+            .padding(horizontal = 24.dp)
+            .fillMaxWidth()
+            .height(500.dp)
+    )
+    {
         item {
             Box(
                 Modifier
-                    .offset(24.dp, 80.dp)
+                    // .offset(24.dp, 80.dp)
                     .fillMaxWidth()
                     .height(200.dp)
                 //.background(color = Color.Green)
@@ -292,24 +320,18 @@ private fun DotaScreen() {
             }
         }
         item {
-            Box(
-                Modifier
-                    .offset(40.dp, 90.dp)
-            )
+            Box()
             {
-                Image(
-                    painter = painterResource(id = R.drawable.polosa),
-                    contentDescription = "polosa",
-                    modifier = Modifier
-                        .width(300.dp)
-                        .height(10.dp)
+                Divider(
+                    color = Color(0xFF1a1f29),
+                    thickness = 2.dp,
+                    modifier = Modifier.padding(top = 25.dp, start = 20.dp, end = 20.dp)
                 )
             }
         }
         item {
             Box(
                 Modifier
-                    .offset(24.dp, 50.dp)
                     .fillMaxWidth()
                     .height(200.dp)
             )
@@ -347,28 +369,65 @@ private fun DotaScreen() {
                 )
             }
         }
-        item{
-            Box(modifier = Modifier.height(220.dp))
-            {
-                Button(
-                    onClick = {      },
-                    modifier = Modifier
-                        //   .padding(8.dp)
-                        .offset(0.dp, 100.dp)
-                        .height(100.dp)
-                        .clip(RoundedCornerShape(16.dp))
-                        .width(500.dp),
+    }
+}
 
-                    colors = ButtonDefaults.buttonColors(Color(0xFFF4D144))
-                ) {
-                    Text(text = "Install",
-                        fontSize = 24.sp,
-                        color = Color.Black,
-                        fontFamily = skmodern,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
+@Composable
+private fun InstallButton(){
+    Box(modifier = Modifier.height(150.dp))
+    {
+        Button(
+            onClick = {      },
+            modifier = Modifier
+                //   .padding(8.dp)
+                // .offset(0.dp, 100.dp)
+                .height(100.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .width(500.dp),
+
+            colors = ButtonDefaults.buttonColors(Color(0xFFF4D144))
+        ) {
+            Text(text = "Install",
+                fontSize = 24.sp,
+                color = Color.Black,
+                fontFamily = skmodern,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+}
+
+@Composable
+private fun DotaScreen() {
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF050B18)),
+    ) {
+        item {
+            DotaHeader()
+        }
+        item {
+            DotaLogo()
+        }
+        item{
+            DotaTags()
+        }
+        item {
+            DotaDesc()
+        }
+        item {
+            DotaImages()
+        }
+        item {
+            DotaRating()
+        }
+        item {
+            DotaReview()
+        }
+        item{
+            InstallButton()
         }
     }
 }
@@ -379,6 +438,7 @@ fun ApplySystemBarColors() {
     SideEffect {
         systemUiController.setStatusBarColor(color = Color.Transparent, darkIcons = false)
         systemUiController.setNavigationBarColor(color = Color.Transparent, darkIcons = false)
+        systemUiController.setSystemBarsColor(color = Color.Transparent, darkIcons = false)
     }
 }
 
