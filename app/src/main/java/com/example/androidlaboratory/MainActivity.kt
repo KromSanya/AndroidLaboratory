@@ -1,6 +1,7 @@
 package com.example.androidlaboratory
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         setContent {
             AndroidLaboratoryTheme {
                 // A surface container using the 'background' color from the theme
@@ -439,6 +440,7 @@ fun ApplySystemBarColors() {
         systemUiController.setStatusBarColor(color = Color.Transparent, darkIcons = false)
         systemUiController.setNavigationBarColor(color = Color.Transparent, darkIcons = false)
         systemUiController.setSystemBarsColor(color = Color.Transparent, darkIcons = false)
+
     }
 }
 
